@@ -1,13 +1,15 @@
 import {inject, Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthenticationService} from "../service/authentication.service";
+import {NotificationService} from "../service/notification.service";
+import {NotificationType} from "../enum/notification-type.enum";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationGuard  {
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private authenticationService: AuthenticationService, private notificationService: NotificationService, private router: Router) {
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  boolean {
     return this.isUserLoggedIn();
@@ -18,7 +20,7 @@ export class AuthenticationGuard  {
        return true;
     }
     this.router.navigate(['/login'])
-    //TODO: Send notification to user
+    this.notificationService.notify(NotificationType.ERROR, `You need to login to access this page `.toUpperCase())
     return false;
   }
 }
