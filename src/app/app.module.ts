@@ -10,10 +10,16 @@ import {AuthInterceptor} from "./interceptor/auth.interceptor";
 import {AuthenticationGuard} from "./guard/authentication.guard";
 import {NotificationModule} from "./notification/notification.module";
 import {NotificationService} from "./service/notification.service";
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +27,8 @@ import {NotificationService} from "./service/notification.service";
     HttpClientModule,
     NotificationModule
   ],
-  providers: [AuthenticationGuard, NotificationService ,AuthenticationService, UserService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [AuthenticationGuard, NotificationService ,AuthenticationService, UserService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

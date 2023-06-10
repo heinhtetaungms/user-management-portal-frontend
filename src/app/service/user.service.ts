@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../environments/environment";
 import {HttpClient, HttpErrorResponse, HttpEvent} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../model/user";
 import {CustomHttpResponse} from "../model/custom-http-response";
+import {environment} from "../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
@@ -55,11 +55,11 @@ export class UserService {
   public createUserFromDate(logedInUsername: string, user: User, profileImage: File): FormData {
     const formData = new FormData();
     formData.append('currentUsername', logedInUsername)
-    formData.append('firstName', user.firstName)
-    formData.append('lastName', user.lastName)
-    formData.append('username', user.username)
-    formData.append('email', user.email)
-    formData.append('role', user.role)
+    formData.append('firstName', user.firstName!)
+    formData.append('lastName', user.lastName!)
+    formData.append('username', user.username!)
+    formData.append('email', user.email!)
+    formData.append('role', user.role!)
     formData.append('profileImage', profileImage)
     formData.append('isActive', JSON.stringify(user.active))
     formData.append('isNonLocked', JSON.stringify(user.notLocked))
