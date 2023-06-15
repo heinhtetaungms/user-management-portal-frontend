@@ -17,12 +17,12 @@
 
           <div class="input-group mt-3">
             <span class="input-group-text"> <i class="fas fa-key"></i> </span>
-            <input type="text" class="form-control" name="password" placeholder="password" ngModel #passwordInput="ngModel" required>
+            <input type="password" class="form-control" name="password" placeholder="password" ngModel #passwordInput="ngModel" required>
           </div>
           <span class="help-block" style="color: red;" *ngIf="passwordInput.invalid && passwordInput.touched" >Please enter a password</span>
 
           <div class="login_container mt-3">
-            <button type="submit" name="button" class="btn login_btn">
+            <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn login_btn">
               <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
               <span *ngIf="showLoading"> Loading ...</span>
               <span *ngIf="!showLoading"> Login</span>
